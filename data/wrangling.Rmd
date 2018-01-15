@@ -27,6 +27,6 @@ wrangled$closed_date <- strptime(wrangled$closed_date, format = "%m/%d/%Y %H:%M:
 
 wrangled$created_date <- strptime(wrangled$created_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
 
-write_csv(wrangled, 'data_wrangled.csv')
+# write_csv(wrangled, 'data_wrangled.csv')
 ```
 
