@@ -1,0 +1,27 @@
+---
+title: "Data Wrangling"
+author: "Jill Cates"
+date: '2018-01-14'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(lubridate)
+```
+
+
+```{r}
+data <- read_csv('data.csv')
+```
+
+```{r}
+wrangled <- data %>% 
+  select('Unique Key', 'Created Date', 'Closed Date', 'Agency', 'Complaint Type', 'Location Type', 'Borough', 'Incident Address', 'Latitude', 'Longitude')
+
+colnames(wrangled) <- c('id', 'created_date', 'closed_date', 'agency', 'complaint_type', 'location_type', 'borough', 'incident_address', 'lat', 'long')
+
+```
+
