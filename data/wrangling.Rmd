@@ -23,5 +23,10 @@ wrangled <- data %>%
 
 colnames(wrangled) <- c('id', 'created_date', 'closed_date', 'agency', 'complaint_type', 'location_type', 'borough', 'incident_address', 'lat', 'long')
 
+wrangled$closed_date <- strptime(wrangled$closed_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
+
+wrangled$created_date <- strptime(wrangled$created_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
+
+write_csv(wrangled, 'data_wrangled.csv')
 ```
 

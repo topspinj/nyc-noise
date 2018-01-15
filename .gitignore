@@ -35,3 +35,4 @@ vignettes/*.pdf
 
 
 data/data.csv
+data/data_wrangled.csv
