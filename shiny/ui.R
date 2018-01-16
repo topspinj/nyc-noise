@@ -7,16 +7,19 @@ shinyUI(fluidPage(
       checkboxGroupInput("borough",
                          "Select Borough:",
                          choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island", "All")),
-      sliderInput("monthRange", "Month:",
+      sliderInput("month", "Month:",
                    min = 1, max = 12, value = 1
        ),
-      sliderInput("dayRange", "Date:",
+      sliderInput("day", "Date:",
                    min = 1, max = 31, value = 1
-       )
+       ),
+      sliderInput("year", "Year:",
+                  min = 2016, max = 2018, value = 1
+      )
     ),
     mainPanel(
       h3('MAIN PANEL'),
-      tableOutput("nycTable")
+      plotOutput("timePlot")
     )
   )
 )
