@@ -4,11 +4,14 @@ library(shiny)
 shinyUI(fluidPage(
   titlePanel("Nightlife-related Noise Complaints in NYC"),
     sidebarPanel(
-       checkboxGroupInput("boroughs",
-                   "Select Borough:",
-                   choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
-       sliderInput("month", "Month:",
+      checkboxGroupInput("borough",
+                         "Select Borough:",
+                         choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island", "All")),
+      sliderInput("monthRange", "Month:",
                    min = 1, max = 12, value = 1
+       ),
+      sliderInput("dayRange", "Date:",
+                   min = 1, max = 31, value = 1
        )
     ),
     mainPanel(
