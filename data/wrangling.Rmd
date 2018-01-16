@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(lubridate)
+library(forcats)
 ```
 
 
@@ -18,15 +19,41 @@ data <- read_csv('data.csv')
 ```
 
 ```{r}
-wrangled <- data %>% 
+data <- data %>% 
   select('Unique Key', 'Created Date', 'Closed Date', 'Agency', 'Complaint Type', 'Location Type', 'Borough', 'Incident Address', 'Latitude', 'Longitude')
 
-colnames(wrangled) <- c('id', 'created_date', 'closed_date', 'agency', 'complaint_type', 'location_type', 'borough', 'incident_address', 'lat', 'long')
+colnames(data) <- c('id', 'created_date', 'closed_date', 'agency', 'complaint_type', 'location_type', 'borough', 'incident_address', 'lat', 'long')
 
-wrangled$closed_date <- strptime(wrangled$closed_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
+data$closed_date <- strptime(data$closed_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
 
-wrangled$created_date <- strptime(wrangled$created_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
-
-# write_csv(wrangled, 'data_wrangled.csv')
+data$created_date <- strptime(data$created_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
 ```
+
+
+
+```{r}
+# data <- data[data$created_date >= "2016-01-01" & data$created_date <= "2016-12-31", ]
+
+data$borough <- data$borough %>%
+  fct_recode("Brooklyn" = "BROOKLYN", "Queens" = "QUEENS", "Manhattan" = "MANHATTAN", "Staten Island" = "STATEN ISLAND", "Bronx" = "BRONX")
+
+data <- data %>% 
+  filter(borough != 'Unspecified')
+data$borough <- as.factor(data$borough)
+
+data$month_created <- month(data$created_date)
+data$year_created <- year(data$created_date)
+data$day_created <- day(data$created_date)
+data$hour_created <- hour(data$created_date)
+
+data$month_closed <- month(data$closed_date)
+data$year_closed <- year(data$closed_date)
+data$day_closed <- day(data$closed_date)
+
+
+# write_csv(data, 'data/data_wrangled.csv')
+```
+
+
+
 
