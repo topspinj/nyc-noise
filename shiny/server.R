@@ -1,5 +1,6 @@
 library(shiny)
 library(readr)
+library(leaflet)
 
 nycNoise <- read_csv('../data/data_wrangled.csv')
 
@@ -25,6 +26,13 @@ shinyServer(function(input, output) {
       xlab("hour") +
       ylab("frequency") +
       theme_minimal()
+  })
+  output$map <- renderLeaflet({
+    # Use leaflet() here, and only include aspects of the map that
+    # won't need to change dynamically (at least, not unless the
+    # entire map is being torn down and recreated).
+    leaflet(quakes) %>% addTiles() %>%
+      fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat))
   })
 })
 

@@ -15,7 +15,7 @@ library(forcats)
 
 
 ```{r}
-data <- read_csv('data.csv')
+# data <- read_csv('data.csv')
 ```
 
 ```{r}

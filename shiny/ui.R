@@ -1,5 +1,5 @@
 library(shiny)
-
+library(leaflet)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   titlePanel("Nightlife-related Noise Complaints in NYC"),
@@ -19,7 +19,8 @@ shinyUI(fluidPage(
     ),
     mainPanel(
       h3('MAIN PANEL'),
-      plotOutput("timePlot")
+      plotOutput("timePlot"),
+      leafletOutput("map")
     )
   )
 )
