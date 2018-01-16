@@ -14,7 +14,10 @@ shinyUI(fluidPage(
                    min = 1, max = 31, value = 1
        ),
       sliderInput("year", "Year:",
-                  min = 2016, max = 2018, value = 2016
+                  min = 2016, 
+                  max = 2018, 
+                  value = 2016, 
+                  sep = ""
       )
     ),
     mainPanel(
