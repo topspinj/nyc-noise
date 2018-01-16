@@ -31,8 +31,10 @@ shinyServer(function(input, output) {
     # Use leaflet() here, and only include aspects of the map that
     # won't need to change dynamically (at least, not unless the
     # entire map is being torn down and recreated).
-    leaflet(quakes) %>% addTiles() %>%
-      fitBounds(~min(long), ~min(lat), ~max(long), ~max(lat))
+    pal <- colorFactor(c("navy", "red", "dark green", "black", "yellow", "orange"), 
+                       domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx", "Long Island"))
+    leaflet(data = nycData()) %>% addTiles() %>%
+      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), fillOpacity = 0.5)
   })
 })
 
