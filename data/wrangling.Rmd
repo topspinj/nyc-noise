@@ -49,13 +49,14 @@ data$month_created <- month(data$created_date)
 data$year_created <- year(data$created_date)
 data$day_created <- day(data$created_date)
 data$hour_created <- hour(data$created_date)
+data$weekday <- weekdays(data$created_date)
 
 data$month_closed <- month(data$closed_date)
 data$year_closed <- year(data$closed_date)
 data$day_closed <- day(data$closed_date)
 
 
-write_csv(data, 'data_wrangled.csv')
+# write_csv(data, 'data_wrangled.csv')
 ```
 
 

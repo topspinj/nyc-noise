@@ -7,10 +7,58 @@ library(plotly)
 
 nycNoise <- read_csv('../data/data_wrangled.csv')
 
-print(str(nycNoise))
-
 shinyServer(function(input, output) {
+  # summary mode
   
+  nycNoise2016 <- reactive({
+    nycNoise %>% 
+      filter(year_created == 2016 | year_created == 2017)
+  })
+  output$dayOfWeek <- renderPlotly({
+    yaxis = list(
+      title = 'count'
+    )
+    xaxis = list(
+      title = 'day of week'
+    )    
+    nycNoise2016() %>% count(weekday, borough) %>%
+    plot_ly(x = ~weekday, y = ~n, color=~borough, type="bar") %>% 
+      layout(xaxis = xaxis, yaxis = yaxis)
+  })
+  
+  output$byTime <- renderPlotly({
+    yaxis = list(
+      title = 'count'
+    )
+    xaxis = list(
+      title = 'time of day'
+    )
+    
+
+    nycNoise2016() %>% count(hour_created) %>% 
+      plot_ly(x=~hour_created, y=~n, type="scatter", mode="lines") %>% 
+      layout(xaxis = xaxis, yaxis = yaxis)
+  })
+
+  
+  output$byMonth <- renderPlotly({
+    yaxis = list(
+      title = 'count'
+    )
+    xaxis = list(
+      title = 'month'
+    )
+    nycNoise2016() %>% count(month_created) %>%
+      plot_ly(x = ~month_created, y = ~n, type="scatter", mode="lines") %>% 
+      layout(xaxis = xaxis, yaxis = yaxis)
+  })
+  
+  output$byBorough <- renderPlotly({
+    nycNoise2016() %>% count(borough) %>% 
+      plot_ly(x=~borough, y=~n, type="bar")
+  })
+  
+  # analysis mode
   nycData <- reactive({
       df <- nycNoise %>% 
         filter(month_created == input$month,
@@ -22,7 +70,6 @@ shinyServer(function(input, output) {
   output$nycTable <- renderTable({ 
     nycData()
   })
-  
   
   output$timePlot <- renderPlotly({
     xaxis <- list(
@@ -39,9 +86,8 @@ shinyServer(function(input, output) {
     )
     
     nycData() %>% count(hour_created) %>%
-      plot_ly(x = ~hour_created, y = ~n, type="bar", color = 'dark red') %>% 
+      plot_ly(x = ~hour_created, y = ~n, type="bar", color = 'dark red', mode='markers', text = ~paste('Time of day: ', hour_created, 'Count:', n)) %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
-  
   })
   
   output$event <- renderPrint({

@@ -23,9 +23,17 @@ shinyUI(fluidPage(
     )
   ),
   mainPanel(
-    plotlyOutput("timePlot"),
-    verbatimTextOutput("event"),
-    leafletOutput("map")
+    tabsetPanel(
+      tabPanel("Summary", 
+               plotlyOutput("dayOfWeek"), 
+               plotlyOutput("byMonth"),
+               plotlyOutput("byBorough"),
+               plotlyOutput("byTime")),
+      tabPanel("Analysis",
+               plotlyOutput("timePlot"),
+               verbatimTextOutput("event"),
+               leafletOutput("map"))
+    )
   )
 )
 )
