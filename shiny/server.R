@@ -15,19 +15,33 @@ shinyServer(function(input, output) {
       df <- nycNoise %>% 
         filter(month_created == input$month,
                day_created == input$day,
-               year_created == input$year)
+               year_created == input$year,
+               borough == input$borough)
   })
 
   output$nycTable <- renderTable({ 
     nycData()
   })
   
-
   
   output$timePlot <- renderPlotly({
-    plot_ly(nycData(), x=~hour_created,
-            type = "histogram",
-            histnorm = "probability")
+    xaxis <- list(
+      autotick = FALSE,
+      ticks = "outside",
+      tick0 = 0,
+      dtick = 1,
+      tickcolor = toRGB("#262626"),
+      title = "time of day"
+    )
+    
+    yaxis <- list(
+      title = 'count'
+    )
+    
+    nycData() %>% count(hour_created) %>%
+      plot_ly(x = ~hour_created, y = ~n, type="bar", color = 'dark red') %>% 
+      layout(xaxis = xaxis, yaxis = yaxis)
+  
   })
   
   output$event <- renderPrint({
@@ -35,27 +49,12 @@ shinyServer(function(input, output) {
     if (is.null(d)) "Hover on a point!" else d
   })
   
-  output$info <- renderText({
-    xy_str <- function(e) {
-      if(is.null(e)) return("NULL\n")
-      paste0("x=", round(e$x, 1), " y=", round(e$y, 1), "\n")
-    }
-    xy_range_str <- function(e) {
-      if(is.null(e)) return("NULL\n")
-      paste0("xmin=", round(e$xmin, 1), " xmax=", round(e$xmax, 1), 
-             " ymin=", round(e$ymin, 1), " ymax=", round(e$ymax, 1))
-    }
-    
-    paste0(
-      "click: ", xy_str(input$plot_click)
-    )
-  })
   
   output$map <- renderLeaflet({
-    pal <- colorFactor(c("navy", "red", "dark green", "black", "yellow", "orange"), 
+    pal <- colorFactor(c("#003432", "#AC1C18", "#191C59", "#2E0239", "#F7B500",  "#0B1AAA"), 
                        domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx", "Long Island"))
     leaflet(data = nycData()) %>% addTiles() %>%
-      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), fillOpacity = 0.5)
+      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), radius = 4, fillOpacity = 0.5)
   })
 
 })

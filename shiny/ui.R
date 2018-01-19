@@ -7,7 +7,8 @@ shinyUI(fluidPage(
   sidebarPanel(
     checkboxGroupInput("borough",
                        "Select Borough:",
-                       choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
+                       choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island"),
+                       selected=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
     sliderInput("month", "Month:",
                 min = 1, max = 12, value = 1
     ),
@@ -22,9 +23,7 @@ shinyUI(fluidPage(
     )
   ),
   mainPanel(
-    h3('MAIN PANEL'),
     plotlyOutput("timePlot"),
-    verbatimTextOutput("info"),
     verbatimTextOutput("event"),
     leafletOutput("map")
   )

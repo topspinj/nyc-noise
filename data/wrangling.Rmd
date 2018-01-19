@@ -15,8 +15,10 @@ library(forcats)
 
 
 ```{r}
-# data <- read_csv('data.csv')
+data <- read_csv('data.csv')
 ```
+
+
 
 ```{r}
 data <- data %>% 
@@ -24,9 +26,11 @@ data <- data %>%
 
 colnames(data) <- c('id', 'created_date', 'closed_date', 'agency', 'complaint_type', 'location_type', 'borough', 'incident_address', 'lat', 'long')
 
-data$closed_date <- strptime(data$closed_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
+data$closed_date <- parse_date_time(data$closed_date, "%m/%d/%Y $I:%M:%S %p", tz = "EST5EDT")
 
-data$created_date <- strptime(data$created_date, format = "%m/%d/%Y %H:%M:%S", tz = "EST5EDT")
+data$created_date <- parse_date_time(data$created_date, "%m/%d/%Y %I:%M:%S %p", tz = "EST5EDT")
+
+
 ```
 
 
@@ -51,7 +55,7 @@ data$year_closed <- year(data$closed_date)
 data$day_closed <- day(data$closed_date)
 
 
-# write_csv(data, 'data/data_wrangled.csv')
+write_csv(data, 'data_wrangled.csv')
 ```
 
 
