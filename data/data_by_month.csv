@@ -1,73 +1,73 @@
 month_created,borough,count,month
-1,Overall (mean),6034.2,January
-2,Overall (mean),4709.6,February
-3,Overall (mean),5289.6,March
-4,Overall (mean),7765.6,April
-5,Overall (mean),9640.4,May
-6,Overall (mean),10757.2,June
-7,Overall (mean),10566.4,July
-8,Overall (mean),9158.8,August
-9,Overall (mean),10284.2,September
-10,Overall (mean),8199.4,October
-11,Overall (mean),5530.2,November
-12,Overall (mean),6023.6,December
-1,Bronx,7496,January
-1,Brooklyn,8146,January
-1,Manhattan,9830,January
-1,Queens,4222,January
-1,Staten Island,477,January
-2,Bronx,5488,February
-2,Brooklyn,6573,February
-2,Manhattan,7792,February
-2,Queens,3213,February
-2,Staten Island,482,February
+1,Average,6034.2,Jan
+2,Average,4709.6,Feb
+3,Average,5289.6,March
+4,Average,7765.6,April
+5,Average,9640.4,May
+6,Average,10757.2,June
+7,Average,10566.4,July
+8,Average,9158.8,Aug
+9,Average,10284.2,Sept
+10,Average,8199.4,Oct
+11,Average,5530.2,Nov
+12,Average,6023.6,Dec
+1,Bronx,7496,Jan
+1,Brooklyn,8146,Jan
+1,Manhattan,9830,Jan
+1,Queens,4222,Jan
+1,StatenIsland,477,Jan
+2,Bronx,5488,Feb
+2,Brooklyn,6573,Feb
+2,Manhattan,7792,Feb
+2,Queens,3213,Feb
+2,StatenIsland,482,Feb
 3,Bronx,5878,March
 3,Brooklyn,7684,March
 3,Manhattan,8680,March
 3,Queens,3619,March
-3,Staten Island,587,March
+3,StatenIsland,587,March
 4,Bronx,7945,April
 4,Brooklyn,11470,April
 4,Manhattan,12201,April
 4,Queens,6300,April
-4,Staten Island,912,April
+4,StatenIsland,912,April
 5,Bronx,9576,May
 5,Brooklyn,15240,May
 5,Manhattan,13449,May
 5,Queens,8721,May
-5,Staten Island,1216,May
+5,StatenIsland,1216,May
 6,Bronx,11086,June
 6,Brooklyn,17452,June
 6,Manhattan,13553,June
 6,Queens,10080,June
-6,Staten Island,1615,June
+6,StatenIsland,1615,June
 7,Bronx,11937,July
 7,Brooklyn,16955,July
 7,Manhattan,11496,July
 7,Queens,10907,July
-7,Staten Island,1537,July
-8,Bronx,10145,August
-8,Brooklyn,15182,August
-8,Manhattan,10435,August
-8,Queens,8663,August
-8,Staten Island,1369,August
-9,Bronx,9647,September
-9,Brooklyn,17833,September
-9,Manhattan,12599,September
-9,Queens,10195,September
-9,Staten Island,1147,September
-10,Bronx,7987,October
-10,Brooklyn,12546,October
-10,Manhattan,12150,October
-10,Queens,7402,October
-10,Staten Island,912,October
-11,Bronx,6263,November
-11,Brooklyn,7568,November
-11,Manhattan,9027,November
-11,Queens,4229,November
-11,Staten Island,564,November
-12,Bronx,7159,December
-12,Brooklyn,7951,December
-12,Manhattan,10040,December
-12,Queens,4599,December
-12,Staten Island,369,December
+7,StatenIsland,1537,July
+8,Bronx,10145,Aug
+8,Brooklyn,15182,Aug
+8,Manhattan,10435,Aug
+8,Queens,8663,Aug
+8,StatenIsland,1369,Aug
+9,Bronx,9647,Sept
+9,Brooklyn,17833,Sept
+9,Manhattan,12599,Sept
+9,Queens,10195,Sept
+9,StatenIsland,1147,Sept
+10,Bronx,7987,Oct
+10,Brooklyn,12546,Oct
+10,Manhattan,12150,Oct
+10,Queens,7402,Oct
+10,StatenIsland,912,Oct
+11,Bronx,6263,Nov
+11,Brooklyn,7568,Nov
+11,Manhattan,9027,Nov
+11,Queens,4229,Nov
+11,StatenIsland,564,Nov
+12,Bronx,7159,Dec
+12,Brooklyn,7951,Dec
+12,Manhattan,10040,Dec
+12,Queens,4599,Dec
+12,StatenIsland,369,Dec

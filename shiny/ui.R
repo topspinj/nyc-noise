@@ -25,14 +25,16 @@ shinyUI(fluidPage(
   mainPanel(
     tabsetPanel(
       tabPanel("Summary", 
-               plotlyOutput("dayOfWeek"), 
+               h3("Summary of Noise Complaints in NYC from January 2016 to December 2017"),
+               plotlyOutput("dayOfWeek"),
                plotlyOutput("byMonth"),
                plotlyOutput("byBorough"),
                plotlyOutput("byTime")),
       tabPanel("Analysis",
                plotlyOutput("timePlot"),
                verbatimTextOutput("event"),
-               leafletOutput("map"))
+               leafletOutput("map")),
+      selected="Analysis"
     )
   )
 )

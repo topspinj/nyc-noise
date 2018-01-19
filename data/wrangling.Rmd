@@ -55,8 +55,16 @@ data$month_closed <- month(data$closed_date)
 data$year_closed <- year(data$closed_date)
 data$day_closed <- day(data$closed_date)
 
+data$weekdays <- as.factor(data$weekday) %>%
+  fct_recode("1" = "Monday", "2" = "Tuesday", "3" = "Wednesday", "4" = "Thursday", "5" = "Friday", "6" = "Saturday", "7" = "Sunday")
+head(data)
+#write_csv(data, 'data_wrangled.csv')
 
-# write_csv(data, 'data_wrangled.csv')
+data %>% 
+  group_by(weekday) %>% 
+  summarise(
+    count = n()
+  )
 ```
 
 
@@ -76,7 +84,7 @@ average <- by_month %>%
   summarise(
     count = sum(count)/5
   )
-average$borough <- rep("Overall (mean)", 12)
+average$borough <- rep("Average", 12)
 
 
 df <- data.frame(average$month_created, average$borough, average$count)
@@ -89,10 +97,12 @@ colnames(df2) <- c("month_created", "borough", "count")
 newdf <- rbind(df, df2)
 
 newdf$month <- as.factor(newdf$month_created) %>%
-  fct_recode("January" = "1", "February" = "2", "March" = "3", "April" = "4", "May" = "5", "June" = "6", "July" = "7", "August" = "8", "September" = "9", "October" = "10", "November" = "11", "December" = "12")
+  fct_recode("Jan" = "1", "Feb" = "2", "March" = "3", "April" = "4", "May" = "5", "June" = "6", "July" = "7", "Aug" = "8", "Sept" = "9", "Oct" = "10", "Nov" = "11", "Dec" = "12")
 
+newdf$borough <- as.factor(newdf$borough) %>% 
+  fct_recode("StatenIsland" = "Staten Island")
 
-write_csv(newdf, "data_by_month.csv")
+#write_csv(newdf, "data_by_month.csv")
 ```
 
 
@@ -101,5 +111,5 @@ write_csv(newdf, "data_by_month.csv")
 ```{r}
 newdf2 <- newdf %>% 
   spread(borough, count) 
-write_csv(newdf2, 'data_by_month2.csv')
+#write_csv(newdf2, 'data_by_month2.csv')
 ```

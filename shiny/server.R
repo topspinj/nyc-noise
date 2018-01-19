@@ -10,20 +10,31 @@ noiseByMonth <- read_csv('../data/data_by_month.csv')
 
 shinyServer(function(input, output) {
   # summary mode
-  
   nycNoise2016 <- reactive({
     nycNoise %>% 
       filter(year_created == 2016 | year_created == 2017)
   })
+  
+  byWeekday <- reactive({
+    df <- nycNoise %>% 
+      group_by(weekday) %>% 
+      summarise(
+        count = n()
+      )
+    df$weekday <- factor(df$weekday, c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+    df
+  })
+  
   output$dayOfWeek <- renderPlotly({
     yaxis = list(
       title = 'count'
     )
     xaxis = list(
-      title = 'day of week'
-    )    
-    nycNoise2016() %>% count(weekday, borough) %>%
-    plot_ly(x = ~weekday, y = ~n, color=~borough, type="bar") %>% 
+      title = 'day of week',
+      tickfont=list(size=10)
+    ) 
+
+    plot_ly(byWeekday(), x = ~weekday, y = ~count, type="bar") %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
   })
   
@@ -46,14 +57,24 @@ shinyServer(function(input, output) {
       title = 'count'
     )
     xaxis = list(
-      title = 'month'
+      title = 'month',
+      tickangle=-90
     )
-      plot_ly(noiseByMonth, x = ~month_created ~ fct_reorder(month, month_created), y = ~count, color=~borough, type="scatter", mode="lines")
+
+      plot_ly(noiseByMonth, x = ~month ~ fct_reorder(month, month_created), y = ~count, color=~borough, type="scatter", mode="lines", line=list(width=4)) %>% 
+        layout(hovermode = 'compare', yaxis=yaxis, xaxis=xaxis, margin = list(b = 70))
   })
   
   output$byBorough <- renderPlotly({
+    yaxis = list(
+      title = 'count'
+    )
+    xaxis = list(
+      title = 'borough'
+    )
     nycNoise2016() %>% count(borough) %>% 
-      plot_ly(x=~borough, y=~n, type="bar")
+      plot_ly(x=~borough, y=~n, type="bar") %>% 
+      layout(xaxis=xaxis, yaxis=yaxis)
   })
   
   # analysis mode
@@ -65,10 +86,6 @@ shinyServer(function(input, output) {
                borough == input$borough)
   })
 
-  output$nycTable <- renderTable({ 
-    nycData()
-  })
-  
   output$timePlot <- renderPlotly({
     xaxis <- list(
       autotick = FALSE,
