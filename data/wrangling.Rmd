@@ -60,5 +60,46 @@ data$day_closed <- day(data$closed_date)
 ```
 
 
+```{r}
+by_month <- data %>% 
+  group_by(month_created, borough) %>% 
+  summarise(
+    count = n()
+  )
+
+by_month %>% 
+  spread(borough, count)
+
+average <- by_month %>% 
+  ungroup() %>% 
+  group_by(month_created) %>% 
+  summarise(
+    count = sum(count)/5
+  )
+average$borough <- rep("Overall (mean)", 12)
 
 
+df <- data.frame(average$month_created, average$borough, average$count)
+colnames(df) <- c("month_created", "borough", "count")
+
+
+df2 <- data.frame(by_month$month_created, by_month$borough, by_month$count)
+colnames(df2) <- c("month_created", "borough", "count")
+
+newdf <- rbind(df, df2)
+
+newdf$month <- as.factor(newdf$month_created) %>%
+  fct_recode("January" = "1", "February" = "2", "March" = "3", "April" = "4", "May" = "5", "June" = "6", "July" = "7", "August" = "8", "September" = "9", "October" = "10", "November" = "11", "December" = "12")
+
+
+write_csv(newdf, "data_by_month.csv")
+```
+
+
+
+
+```{r}
+newdf2 <- newdf %>% 
+  spread(borough, count) 
+write_csv(newdf2, 'data_by_month2.csv')
+```

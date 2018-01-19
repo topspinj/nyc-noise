@@ -4,8 +4,9 @@ library(leaflet)
 library(dplyr)
 library(ggplot2)
 library(plotly)
-
+library(forcats)
 nycNoise <- read_csv('../data/data_wrangled.csv')
+noiseByMonth <- read_csv('../data/data_by_month.csv')
 
 shinyServer(function(input, output) {
   # summary mode
@@ -34,7 +35,6 @@ shinyServer(function(input, output) {
       title = 'time of day'
     )
     
-
     nycNoise2016() %>% count(hour_created) %>% 
       plot_ly(x=~hour_created, y=~n, type="scatter", mode="lines") %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
@@ -48,9 +48,7 @@ shinyServer(function(input, output) {
     xaxis = list(
       title = 'month'
     )
-    nycNoise2016() %>% count(month_created) %>%
-      plot_ly(x = ~month_created, y = ~n, type="scatter", mode="lines") %>% 
-      layout(xaxis = xaxis, yaxis = yaxis)
+      plot_ly(noiseByMonth, x = ~month_created ~ fct_reorder(month, month_created), y = ~count, color=~borough, type="scatter", mode="lines")
   })
   
   output$byBorough <- renderPlotly({
