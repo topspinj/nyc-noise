@@ -16,3 +16,21 @@ The key features that I will be looking at are: (1) date of noise complaint, (2)
 * Note: 311 is a non-emergency call center that allows residents to either file complaints or make service requests. 
 
 Dataset can be found at [NYC Open Data](https://data.cityofnewyork.us/d/fhrw-4uyv/visualization) and [Kaggle](https://www.kaggle.com/somesnm/partynyc).
+
+
+## Screenshots
+
+The app has two modes: Summary and Analysis.
+
+### Summary 
+
+This view gives you a "big picture" view of noise complaint trends in NYC from January 2016 until December 2017.
+
+![](screenshots/summary-full-screen.png)
+
+
+### Analysis 
+
+This view allows you to look at noise complaint data for a specific day and borough. 
+
+![](screenshots/summary-full-screen.png)
