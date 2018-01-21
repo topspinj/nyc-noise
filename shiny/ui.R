@@ -1,6 +1,7 @@
 library(shiny)
 library(leaflet)
 library(plotly)
+library(shinycssloaders)
 library(shinythemes)
 
 shinyUI(fluidPage(theme = shinytheme("simplex"),
@@ -15,11 +16,11 @@ shinyUI(fluidPage(theme = shinytheme("simplex"),
                ),
           mainPanel(
                h3("Summary of Noise Complaints in NYC from January 2016 to December 2017"),
-               plotlyOutput("dayOfWeek"),
-               plotlyOutput("byMonth"),
-               plotlyOutput("byBorough"),
-               plotlyOutput("byTime"))
-          ),
+               withSpinner(plotlyOutput("dayOfWeek")),
+               withSpinner(plotlyOutput("byMonth")),
+               withSpinner(plotlyOutput("byBorough")),
+               withSpinner(plotlyOutput("byTime"))
+          )),
       tabPanel("Analysis",
                sidebarPanel(
                  checkboxGroupInput("borough",
@@ -47,3 +48,4 @@ shinyUI(fluidPage(theme = shinytheme("simplex"),
     )
 )
 )
+

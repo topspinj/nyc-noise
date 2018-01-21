@@ -5,6 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(forcats)
+
 nycNoise <- read_csv('../data/data_wrangled.csv')
 noiseByMonth <- read_csv('../data/data_by_month.csv')
 
@@ -93,6 +94,9 @@ shinyServer(function(input, output) {
                day_created == input$day,
                year_created == input$year,
                borough == input$borough)
+      
+      df$hour_created <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
+      df
   })
 
   output$timePlot <- renderPlotly({
@@ -106,12 +110,11 @@ shinyServer(function(input, output) {
     )
     
     yaxis <- list(
-      title = 'count'
+      title = 'complaint count'
     )
     
     nycData() %>% count(hour_created) %>%
       plot_ly(x = ~hour_created, y = ~n, type="bar",
-              colors="Set1",
               text = ~paste('Time of day: ', hour_created, '</br>', 
                             '</br> Count:', n),
               hoverinfo="text") %>% 
