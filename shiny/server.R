@@ -6,8 +6,8 @@ library(ggplot2)
 library(plotly)
 library(forcats)
 
-nycNoise <- read_csv('../data/data_wrangled.csv')
-noiseByMonth <- read_csv('../data/data_by_month.csv')
+nycNoise <- read_csv('data_wrangled.csv')
+noiseByMonth <- read_csv('data_by_month.csv')
 
 shinyServer(function(input, output) {
   # summary mode
@@ -98,7 +98,15 @@ shinyServer(function(input, output) {
       df$hour_created <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
       df
   })
+  
+  formatMonth <- reactive({
+    month.name[input$month]
+  })
 
+  output$selected <- renderText({
+    paste(formatMonth(), input$day, input$year)
+  })
+    
   output$timePlot <- renderPlotly({
     xaxis <- list(
       autotick = FALSE,
@@ -119,11 +127,6 @@ shinyServer(function(input, output) {
                             '</br> Count:', n),
               hoverinfo="text") %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
-  })
-  
-  output$event <- renderPrint({
-    d <- event_data("plotly_hover")
-    if (is.null(d)) "Hover on a point!" else d
   })
   
   
