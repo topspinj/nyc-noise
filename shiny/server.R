@@ -133,8 +133,13 @@ shinyServer(function(input, output) {
   output$map <- renderLeaflet({
     pal <- colorFactor(c("#003432", "#AC1C18", "#191C59", "#2E0239", "#F7B500",  "#0B1AAA"), 
                        domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx", "Long Island"))
-    leaflet(data = nycData()) %>% addTiles() %>%
-      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), radius = 4, fillOpacity = 0.5)
+    leaflet(data = nycData()) %>% 
+      addTiles() %>%
+      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), radius = 4, fillOpacity = 0.5) %>% 
+      addLegend("bottomright", pal = pal, values = ~borough,
+                title = "Boroughs",
+                opacity = 1
+      )
   })
 
 })
