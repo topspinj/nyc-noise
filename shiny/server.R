@@ -27,34 +27,39 @@ shinyServer(function(input, output) {
   
   output$dayOfWeek <- renderPlotly({
     yaxis = list(
-      title = 'count'
+      title = 'complaint count'
     )
     xaxis = list(
       title = 'day of week',
       tickfont=list(size=10)
     ) 
 
-    plot_ly(byWeekday(), x = ~weekday, y = ~count, type="bar") %>% 
+    plot_ly(byWeekday(), x = ~weekday, y = ~count, type="bar",
+            text=~paste( weekday, '</br>', 
+                        '</br> Count:', count),
+            hoverinfo="text") %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
   })
   
   output$byTime <- renderPlotly({
     yaxis = list(
-      title = 'count'
+      title = 'complaint count'
     )
     xaxis = list(
       title = 'time of day'
     )
     
     nycNoise2016() %>% count(hour_created) %>% 
-      plot_ly(x=~hour_created, y=~n, type="scatter", mode="lines") %>% 
+      plot_ly(x=~hour_created, y=~n, type="scatter", mode="lines", hoverinfo = 'text',
+              text = ~paste('Time:', hour_created, '</br>',
+                            '</br>Complaint count:', n)) %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
   })
 
   
   output$byMonth <- renderPlotly({
     yaxis = list(
-      title = 'count'
+      title = 'complaint count'
     )
     xaxis = list(
       title = 'month',
@@ -67,13 +72,17 @@ shinyServer(function(input, output) {
   
   output$byBorough <- renderPlotly({
     yaxis = list(
-      title = 'count'
+      title = 'complaint count'
     )
     xaxis = list(
       title = 'borough'
     )
     nycNoise2016() %>% count(borough) %>% 
-      plot_ly(x=~borough, y=~n, type="bar") %>% 
+      plot_ly(x=~borough, y=~n, type="bar", 
+              text = ~paste('Borough: ', 
+                        borough, '</br>', 
+                        '</br> Count:', n),
+              hoverinfo="text") %>% 
       layout(xaxis=xaxis, yaxis=yaxis)
   })
   
@@ -101,7 +110,11 @@ shinyServer(function(input, output) {
     )
     
     nycData() %>% count(hour_created) %>%
-      plot_ly(x = ~hour_created, y = ~n, type="bar", color = 'dark red', mode='markers', text = ~paste('Time of day: ', hour_created, 'Count:', n)) %>% 
+      plot_ly(x = ~hour_created, y = ~n, type="bar",
+              colors="Set1",
+              text = ~paste('Time of day: ', hour_created, '</br>', 
+                            '</br> Count:', n),
+              hoverinfo="text") %>% 
       layout(xaxis = xaxis, yaxis = yaxis)
   })
   
