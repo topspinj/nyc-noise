@@ -33,4 +33,4 @@ This view gives you a "big picture" view of noise complaint trends in NYC from J
 
 This view allows you to look at noise complaint data for a specific day and borough. 
 
-![](screenshots/summary-full-screen.png)
+![](screenshots/analysis-full-screen.png)
