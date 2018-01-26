@@ -65,7 +65,27 @@ data %>%
   summarise(
     count = n()
   )
+
 ```
+
+```{r}
+data %>% 
+  filter(year_created=='2016'|year_created=='2017') %>% 
+  group_by(year_created, month_created, day_created, hour_created) %>% 
+  summarise(
+    count = n()
+  ) %>% 
+  group_by(day_created, hour_created) %>% 
+  summarise(
+    count = n()
+  ) %>% 
+  group_by(hour_created) %>% 
+  summarise(
+    mean = mean(count)
+  )
+```
+
+
 
 
 ```{r}

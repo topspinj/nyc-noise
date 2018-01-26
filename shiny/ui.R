@@ -7,8 +7,7 @@ library(shinythemes)
 shinyUI(fluidPage(
   includeCSS("styles.css"),
   titlePanel("Nightlife-related Noise Complaints in NYC"),
-    tabsetPanel(
-      tabPanel("Analysis",
+
                sidebarPanel(
                  checkboxGroupInput("borough",
                                     "Select Borough:",
@@ -29,19 +28,12 @@ shinyUI(fluidPage(
                ),
                mainPanel(
                  h3(textOutput("selected")),
+                 fluidRow(
+                   splitLayout(height=1, plotlyOutput('byMonth'), plotlyOutput('byBorough'))
+                   ),
                  plotlyOutput("timePlot"),
                  h3('Where are the noise complaints happening?'),
-                 leafletOutput("map"))),
-      tabPanel("Summary",
-          mainPanel(
-               h3("Summary of Noise Complaints in NYC from January 2016 to December 2017"),
-               withSpinner(plotlyOutput("dayOfWeek")),
-               withSpinner(plotlyOutput("byMonth")),
-               withSpinner(plotlyOutput("byBorough")),
-               withSpinner(plotlyOutput("byTime"))
-          )),
-      selected="Analysis"
-    )
-)
+                 leafletOutput("map"))
+  )
 )
 
