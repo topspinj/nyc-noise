@@ -1,13 +1,6 @@
-library(shiny)
-library(readr)
-library(leaflet)
 library(dplyr)
 library(ggplot2)
-library(plotly)
 library(forcats)
-
-nycNoise <- read_csv('data_wrangled.csv')
-noiseByMonth <- read_csv('data_by_month.csv')
 
 shinyServer(function(input, output) {
   # summary mode
