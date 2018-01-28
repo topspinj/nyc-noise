@@ -109,7 +109,7 @@ shinyServer(function(input, output) {
   })
 
   output$selected <- renderText({
-    paste(formatMonth(), input$day, input$year)
+    paste(format(input$date, "%A, %B %d, %Y"))
   })
     
   output$timePlot <- renderPlotly({
