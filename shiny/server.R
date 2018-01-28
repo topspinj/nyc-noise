@@ -140,14 +140,27 @@ shinyServer(function(input, output) {
     pal <- colorFactor(c("blue", "red", "dark green", "purple", "navy"), 
                        domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx"))
     
+    getColor <- function(nyc) {
+      sapply(nyc$borough, function(nyc) {
+        if(nyc == "Queens") {
+          "green"
+        } else if(nyc == "Brooklyn") {
+          "orange"
+        } else {
+          "blue"
+        } })
+    }
+    
+    icons <- awesomeIcons(
+      icon = 'ios-close',
+      iconColor = 'black',
+      library = 'ion',
+      markerColor = getColor(nycData())
+    )
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95314677412019, lat = 40.80520120189394, zoom = 13) %>%
       addProviderTiles("OpenMapSurfer.Grayscale", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, label = ~as.character(borough), color = ~pal(borough), radius = 7, fillOpacity = 0.8) %>% 
-      addLegend("bottomright", pal = pal, values = ~borough,
-                title = "Boroughs",
-                opacity = 1
-      ) 
+      addAwesomeMarkers(~long, ~lat, icon=icons, label=~as.character(borough))
   })
 
 })
