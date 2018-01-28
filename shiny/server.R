@@ -158,7 +158,7 @@ shinyServer(function(input, output) {
       markerColor = getColor(nycData())
     )
     leaflet(data = nycData()) %>% 
-      setView(lng = -73.95314677412019, lat = 40.80520120189394, zoom = 13) %>%
+      setView(lng = -73.95, lat = 40.78, zoom = 13) %>%
       addProviderTiles("OpenMapSurfer.Grayscale", options = providerTileOptions(minZoom = 9)) %>% 
       addAwesomeMarkers(~long, ~lat, icon=icons, label=~as.character(borough))
   })
