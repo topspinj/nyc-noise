@@ -1,6 +1,7 @@
 library(dplyr)
 library(ggplot2)
 library(forcats)
+library(lubridate)
 
 shinyServer(function(input, output) {
   # summary mode
@@ -86,9 +87,9 @@ shinyServer(function(input, output) {
   # analysis mode
   nycData <- reactive({
       df <- nycNoise %>% 
-        filter(month_created == input$month,
-               day_created == input$day,
-               year_created == input$year,
+        filter(month_created == month(input$date),
+               day_created == day(input$date),
+               year_created == year(input$date),
                borough == input$borough)
       
       df$hour_created <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)

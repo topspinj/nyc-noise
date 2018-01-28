@@ -10,18 +10,7 @@ shinyUI(fluidPage(
                                     "Select Borough:",
                                     choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island"),
                                     selected=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
-                 sliderInput("month", "Month:",
-                             min = 1, max = 12, value = 1
-                 ),
-                 sliderInput("day", "Date:",
-                             min = 1, max = 31, value = 1
-                 ),
-                 sliderInput("year", "Year:",
-                             min = 2016, 
-                             max = 2018, 
-                             value = 2016, 
-                             sep = ""
-                 )
+                 dateInput("date", label = h3("Date input"), value = "2016-01-01", min="2016-01-01", max="2018-01-15")
                ),
                mainPanel(
                  h3(textOutput("selected")),
