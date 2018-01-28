@@ -128,11 +128,7 @@ shinyServer(function(input, output) {
       plot_ly(x = nycDataHourCount()$hour_created, y =  nycDataHourCount()$n, type="bar", name=paste(formatMonth(), input$day, input$year)) %>% 
         add_trace(x = nycNoise2016()$hour_created, y = nycNoise2016()$mean, type = 'scatter', mode = 'lines',
                 line = list(color = '#45171D'), name="average") %>% 
-        add_trace(x = nycNoise2016()$hour_created, y = nycNoise2016()$max, type = 'scatter', mode = 'lines',
-                  line = list(color = '#45171D', dash='dash'), name="max") %>% 
-        add_trace(x = nycNoise2016()$hour_created, y = nycNoise2016()$min, type = 'scatter', mode = 'lines',
-                  line = list(color = '#45171D', dash='dash'), name="min") %>% 
-        layout(xaxis = xaxis, yaxis = yaxis)
+        layout(xaxis = xaxis, yaxis = yaxis, legend = list(orientation = 'h', x = 0.1, y = -0.3))
   })
   
   

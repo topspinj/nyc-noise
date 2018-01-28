@@ -25,12 +25,12 @@ shinyUI(fluidPage(
                ),
                mainPanel(
                  h3(textOutput("selected")),
-                 fluidRow(
-                   splitLayout(height=1, plotlyOutput('byMonth'), plotlyOutput('byBorough'))
-                   ),
                  plotlyOutput("timePlot"),
                  h3('Where are the noise complaints happening?'),
-                 leafletOutput("map"))
+                 leafletOutput("map"),
+                 fluidRow(
+                   splitLayout(height=1, plotlyOutput('byMonth'), plotlyOutput('byBorough'))
+                 ))
   )
 )
 
