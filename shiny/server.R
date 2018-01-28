@@ -95,14 +95,14 @@ shinyServer(function(input, output) {
   
   
   output$map <- renderLeaflet({
-    pal <- colorFactor(c("blue", "red", "dark green", "purple", "navy"), 
+    pal <- colorFactor(c("#E38DC3", "#FE876A", "#A4D55E", "#8BA2CB", "#6EBFA6"), 
                        domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx"))
     
-
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
       addProviderTiles("OpenMapSurfer.Grayscale", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(borough), label=~as.character(borough))
+      addCircleMarkers(~long, ~lat, color=~pal(borough), label=~as.character(borough), stroke=FALSE, fillOpacity=0.8) %>%  
+      addLegend("bottomright", pal = pal, values = ~borough, title = "Boroughs",opacity = 1)
   })
 
 
