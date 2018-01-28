@@ -18,8 +18,9 @@ shinyUI(fluidPage(
                  h3('Where are the noise complaints happening?'),
                  leafletOutput("map"),
                  fluidRow(
-                   splitLayout(height=1, plotlyOutput('byMonth'), plotlyOutput('byBorough'))
+                   splitLayout(cellWidths = c("50%"), plotlyOutput("byMonth"),plotlyOutput("dayOfWeek"))
                  ))
+                 
   )
 )
 
