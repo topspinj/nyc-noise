@@ -8,7 +8,7 @@ shinyServer(function(input, output) {
   nycNoise2016 <- reactive({
     df<-nycNoise %>% 
       filter(year_created == 2016 | year_created == 2017) %>%
-      filter(borough == input$borough) %>% 
+      filter(borough %in% input$borough) %>% 
       group_by(year_created, month_created, day_created, hour_created) %>% 
       summarise(
         count = n()
@@ -25,10 +25,10 @@ shinyServer(function(input, output) {
   
   nycData <- reactive({
       df <- nycNoise %>% 
-        filter(month_created == month(input$date),
-               day_created == day(input$date),
-               year_created == year(input$date),
-               borough == input$borough)
+        filter(month_created %in% month(input$date),
+               day_created %in% day(input$date),
+               year_created %in% year(input$date),
+               borough %in% input$borough)
       
       df$hour_created <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
       df
@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
   
   noiseMonth <- reactive({
     noiseByMonth %>% 
-      filter(borough == input$borough)
+      filter(borough %in% input$borough)
   })
   
   
