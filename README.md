@@ -2,7 +2,7 @@
 
 ## Live App URL
 
-Shiny app is hosted [here](https://topspinj.shinyapps.io/nycnoise/)
+Live app is hosted [here](https://topspinj.shinyapps.io/nycnoise/)
 
 ## Overview
 
@@ -20,3 +20,7 @@ The key features of interest are: (1) date of noise complaint, (2) time noise co
 * Note: 311 is a non-emergency call center that allows residents to either file complaints or make service requests. 
 
 Dataset can be found at [NYC Open Data](https://data.cityofnewyork.us/d/fhrw-4uyv/visualization) and [Kaggle](https://www.kaggle.com/somesnm/partynyc).
+
+## Screenshot
+
+![](screenshots/app-screenshot.png)
