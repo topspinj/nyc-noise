@@ -62,6 +62,7 @@ shinyServer(function(input, output) {
             color=~borough, 
             type="scatter",
             mode="lines", line=list(width=2)) %>% 
+    layout(paper_bgcolor='transparent') %>% 
     layout(title="<b>Complaint Counts by Month</b>",titlefont=list(size=12), xaxis=xaxis, yaxis=yaxis, legend=list(orientation = 'h', x = 0.1, y = -0.3))
   })
   
@@ -90,6 +91,7 @@ shinyServer(function(input, output) {
       plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", name=paste(format(input$date, "%b %d, %Y"))) %>% 
         add_trace(x = nycNoise2016()$hour_created, y = nycNoise2016()$mean, type = 'scatter', mode = 'lines',
                 line = list(color = '#45171D'), name="average") %>% 
+        layout(paper_bgcolor='transparent') %>% 
         layout(xaxis = xaxis, yaxis = yaxis, legend = list(orientation = 'h', x = 0.1, y = -0.3))
   })
   
@@ -135,6 +137,7 @@ shinyServer(function(input, output) {
             text=~paste( borough, '</br>', 
                          '</br> Count:', count),
             hoverinfo="text") %>% 
+      layout(paper_bgcolor='transparent') %>% 
       layout(title="<b>Complaint Counts by Day of Week</b>",titlefont=list(size=12), xaxis = xaxis, yaxis=yaxis, legend = list(orientation = 'h', x = 0.1, y = -0.3))
   })
   

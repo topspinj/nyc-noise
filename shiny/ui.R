@@ -2,8 +2,9 @@ library(shinycssloaders)
 library(shinythemes)
 
 shinyUI(fluidPage(
+  theme = shinytheme("flatly"),
   includeCSS("styles.css"),
-  titlePanel("Nightlife-related Noise Complaints in NYC"),
+  titlePanel( "Nightlife-related Noise Complaints in NYC"),
 
                sidebarPanel(
                  checkboxGroupInput("borough",
