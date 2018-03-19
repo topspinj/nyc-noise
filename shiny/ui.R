@@ -14,9 +14,9 @@ shinyUI(fluidPage(
                ),
                mainPanel(
                  h3(textOutput("selected")),
-                 plotlyOutput("timePlot"),
+                 withSpinner(plotlyOutput("timePlot")),
                  h3('Where are the noise complaints happening?'),
-                 leafletOutput("map"),
+                 withSpinner(leafletOutput("map")),
                  fluidRow(
                    splitLayout(cellWidths = c("50%"), plotlyOutput("byMonth"),plotlyOutput("dayOfWeek"))
                  ))
