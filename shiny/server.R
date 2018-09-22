@@ -37,12 +37,14 @@ shinyServer(function(input, output) {
     
     yaxis <- list(
       title = 'complaint count',
-      color="white"
+      color="white",
+      showgrid=FALSE
     )
+
     
-      plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", name=paste(format(input$date, "%b %d, %Y"))) %>% 
-        layout(paper_bgcolor='transparent') %>% 
-        layout(xaxis = xaxis, yaxis = yaxis, legend = list(orientation = 'h', x = 0.1, y = -0.3))
+      plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", color = ~hour_created, name=paste(format(input$date, "%b %d, %Y"))) %>% 
+        layout(paper_bgcolor='transparent', plot_bgcolor='transparent') %>% 
+        layout(xaxis = xaxis, yaxis = yaxis)
   })
   
   
@@ -55,8 +57,8 @@ shinyServer(function(input, output) {
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
       addProviderTiles("CartoDB.DarkMatter", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~as.character(hour_created_formatted), stroke=FALSE, fillOpacity=0.8) %>%  
-      addLegend("bottomright", pal = pal, values = ~hour_created, title = "Boroughs",opacity = 1)
+      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~as.character(hour_created_formatted), stroke=FALSE, fillOpacity=0.8)  
+      # addLegend("bottomright", pal = pal, values = ~hour_created, opacity = 1)
   })
   
 })
