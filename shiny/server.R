@@ -30,7 +30,7 @@ shinyServer(function(input, output) {
                year_created %in% year(input$date),
                borough %in% input$borough)
       
-      df$hour_created <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
+     df$hour_created_formatted <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
       df
   })
   
@@ -81,11 +81,13 @@ shinyServer(function(input, output) {
       tick0 = 0,
       dtick = 1,
       tickcolor = toRGB("#262626"),
-      title = "time of day"
+      title = "time of day",
+      color="white"
     )
     
     yaxis <- list(
-      title = 'complaint count'
+      title = 'complaint count',
+      color="white"
     )
     
       plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", name=paste(format(input$date, "%b %d, %Y"))) %>% 
@@ -97,48 +99,16 @@ shinyServer(function(input, output) {
   
   
   output$map <- renderLeaflet({
-    pal <- colorFactor(c("#E38DC3", "#FE876A", "#A4D55E", "#8BA2CB", "#6EBFA6"), 
-                       domain = c("Queens", "Brooklyn", "Staten Island", "Manhattan", "Bronx"))
+    pal <- colorFactor(
+      palette = 'viridis',
+      domain = nycData()$hour_created
+    )
     
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
-      addProviderTiles("OpenMapSurfer.Grayscale", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(borough), label=~as.character(borough), stroke=FALSE, fillOpacity=0.8) %>%  
-      addLegend("bottomright", pal = pal, values = ~borough, title = "Boroughs",opacity = 1)
-  })
-
-
-  byWeekday <- reactive({
-    df <- nycNoise %>% 
-      group_by(weekday, borough) %>% 
-      summarise(
-        count = n()
-      )
-    df$weekday <- factor(df$weekday, c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
-    df$weekday <- df$weekday %>%
-      fct_recode("Mon"="Monday", "Tues"="Tuesday", "Wed"="Wednesday","Thur"= "Thursday","Fri"= "Friday", "Sat"="Saturday", "Sun"="Sunday")
-    df
-  })
-  
-  output$dayOfWeek <- renderPlotly({
-    xaxis = list(
-      title = 'day of week',
-      titlefont = list(size = 12),
-      tickfont=list(size=9),
-      tickangle=-90
-    ) 
-    yaxis = list(
-      title = 'complaint count',
-      titlefont = list(size = 12),
-      tickfont=list(size=9) 
-    )
-
-    plot_ly(byWeekday(), x = ~weekday, y = ~count, color=~borough, type="bar",
-            text=~paste( borough, '</br>', 
-                         '</br> Count:', count),
-            hoverinfo="text") %>% 
-      layout(paper_bgcolor='transparent') %>% 
-      layout(title="<b>Complaint Counts by Day of Week</b>",titlefont=list(size=12), xaxis = xaxis, yaxis=yaxis, legend = list(orientation = 'h', x = 0.1, y = -0.3))
+      addProviderTiles("CartoDB.DarkMatter", options = providerTileOptions(minZoom = 9)) %>% 
+      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~as.character(hour_created_formatted), stroke=FALSE, fillOpacity=0.8) %>%  
+      addLegend("bottomright", pal = pal, values = ~hour_created, title = "Boroughs",opacity = 1)
   })
   
 })
