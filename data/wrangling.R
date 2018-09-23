@@ -15,6 +15,7 @@ data$borough <- data$borough %>%
 data <- data %>% 
   filter(borough != 'Unspecified')
 data$borough <- as.factor(data$borough)
+data$borough <- gsub('\\s+', '', data$borough)
 data$month_created <- month(data$created_date)
 data$year_created <- year(data$created_date)
 data$day_created <- day(data$created_date)
@@ -28,6 +29,7 @@ data$weekdays <- as.factor(data$weekday) %>%
   fct_recode("1" = "Monday", "2" = "Tuesday", "3" = "Wednesday", "4" = "Thursday", "5" = "Friday", "6" = "Saturday", "7" = "Sunday")
 head(data)
 write_csv(data, "data/data_wrangled.csv")
+write_csv(data, "shiny/data_wrangled.csv")
 
 
 # create dataframe that shows complaint counts by month by borough

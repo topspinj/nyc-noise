@@ -2,7 +2,6 @@ library(tidyverse)
 library(viridis)
 
 noise_by_borough <- read.csv("data/data_by_month.csv")
-noise_by_borough$borough <- gsub('\\s+', '', noise_by_borough$borough)
 noise_by_borough$month <- factor(noise_by_borough$month, levels = month.abb)
 # month_created,borough,count,month
 noise_by_borough$month
