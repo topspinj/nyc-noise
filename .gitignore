@@ -34,7 +34,6 @@ vignettes/*.pdf
 .Rproj.user
 
 
-data/data.csv
-data/data_wrangled*
-shiny/data_*
+data/*.csv
+shiny/*.csv
 shiny/rsconnect/
