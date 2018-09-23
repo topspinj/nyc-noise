@@ -13,3 +13,10 @@
 .shiny-split-layout {
   margin-top: 25px;
 }
+
+.shiny-input-container:not(.shiny-input-container-inline) {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+}

@@ -9,7 +9,9 @@ shinyServer(function(input, output) {
         filter(month_created %in% month(input$date),
                day_created %in% day(input$date),
                year_created %in% year(input$date),
-               borough %in% input$borough)
+               borough %in% input$borough,
+               hour_created >= input$time[1],
+               hour_created <= input$time[2])
       
      df$hour_created_formatted <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
       df
@@ -32,7 +34,8 @@ shinyServer(function(input, output) {
       dtick = 1,
       tickcolor = toRGB("#262626"),
       title = "time of day",
-      color="white"
+      color="white",
+      range = c(0,23)
     )
     
     yaxis <- list(
@@ -42,9 +45,10 @@ shinyServer(function(input, output) {
     )
 
     
-      plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", color = ~hour_created, name=paste(format(input$date, "%b %d, %Y"))) %>% 
-        layout(paper_bgcolor='transparent', plot_bgcolor='transparent') %>% 
-        layout(xaxis = xaxis, yaxis = yaxis)
+    plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", color = ~hour_created, name=paste(format(input$date, "%b %d, %Y"))) %>% 
+      layout(paper_bgcolor='transparent', plot_bgcolor='transparent') %>% 
+      layout(xaxis = xaxis, yaxis = yaxis) %>% 
+      hide_colorbar()
   })
   
   
