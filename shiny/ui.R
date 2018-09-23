@@ -14,7 +14,7 @@ shinyUI(fluidPage(
                                    "Select Borough:",
                                    choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island"),
                                    selected=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
-                dateInput("date", label = h5("Date input"), value = "2016-01-01", min="2016-01-01", max="2018-01-15"),
+                dateInput("date", label = h5("Date input"), value = "2017-09-01", min="2017-08-01", max="2018-09-01"),
                 h5(textOutput("selected")),
                 withSpinner(plotlyOutput("timePlot", height=250)),
                 sliderInput("time", "Time of day:",

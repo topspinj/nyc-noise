@@ -11,8 +11,8 @@ shinyServer(function(input, output) {
                day_created %in% day(input$date),
                year_created %in% year(input$date),
                borough %in% input$borough,
-               hour_created >= input$time[1],
-               hour_created <= input$time[2])
+               hour_created >= input$time[[1]],
+               hour_created <= input$time[[2]])
       
      df$hour_created_formatted <- substr(as.POSIXct(sprintf("%04.0f", df$hour_created*100), format='%H%M'), 12, 16)
       df
@@ -66,11 +66,10 @@ shinyServer(function(input, output) {
       domain = seq(0,23)
     )
     
-    
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
       addProviderTiles("CartoDB.DarkMatter", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~as.character(hour_created_formatted), stroke=FALSE, fillOpacity=0.8)  
+      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, stroke=FALSE, fillOpacity=0.8)  
       # addLegend("bottomright", pal = pal, values = ~hour_created, opacity = 1)
   })
   
