@@ -44,19 +44,23 @@ shinyServer(function(input, output) {
       showgrid=FALSE
     )
 
+    pal <- viridis(24)
+    pal <- setNames(pal, paste(seq(0, 23)))
     
-    plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", color = ~hour_created, name=paste(format(input$date, "%b %d, %Y"))) %>% 
+    plot_ly(nycDataHourCount(), x = ~hour_created, y = ~n, type="bar", color= ~paste(hour_created), colors=pal, name=paste(format(input$date, "%b %d, %Y"))) %>% 
       layout(paper_bgcolor='transparent', plot_bgcolor='transparent') %>% 
       layout(xaxis = xaxis, yaxis = yaxis) %>% 
-      hide_colorbar()
+      hide_colorbar() %>% 
+      layout(showlegend = FALSE)
   })
   
   
   output$map <- renderLeaflet({
     pal <- colorFactor(
       palette = 'viridis',
-      domain = nycData()$hour_created
+      domain = seq(0,23)
     )
+    
     
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
