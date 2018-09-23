@@ -15,6 +15,10 @@ This R Shiny app visualizes nightlife-related noise complaint acitvity across Ne
 
 This app uses 311* service request data from [NYC OpenData](https://data.cityofnewyork.us/), filtered for type "noise complaints" with descriptor "loud music/party". The key features of interest are: (1) date of noise complaint, (2) time noise complaint was issued, (3) time noise complaint was resolved, (4) latitude and longitude coordinates where noise complaint was made, and (5) borough (e.g., Manhattan, Queens, Staten Island, Long Island, Bronx). 
 
-## Screenshot
+## When and where are noise complaints reported most?
 
-![](screenshots/app-screenshot.png)
+![](imgs/month_plot.png)
+
+![](imgs/borough_plot.png)
+
+Brooklyn clearly has the biggest nightlife, followed by Manhattan.
