@@ -1,9 +1,18 @@
 .col-sm-4 {
   margin-top: 40px;
+  width: 25%;
+}
+#borough {
+  padding-left: 10px;
+}
+
+#date {
+  padding-left: 10px;
 }
 
 .col-sm-8 {
   margin-bottom: 40px;
+  width: 75%;
 }
 
 .nav.nav-tabs {
@@ -12,6 +21,10 @@
 
 .shiny-split-layout {
   margin-top: 25px;
+}
+
+h2 {
+  font-weight: 600;
 }
 
 .shiny-input-container:not(.shiny-input-container-inline) {
