@@ -20,9 +20,7 @@ shinyUI(fluidPage(
                 sliderInput("time", "Time of day:",
                             min = 0, max = 23,
                             value = c(0,23))
-            
   )
-                 
   )
 )
 

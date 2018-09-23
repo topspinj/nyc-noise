@@ -22,3 +22,7 @@ This app uses 311* service request data from [NYC OpenData](https://data.cityofn
 ![](imgs/borough_plot.png)
 
 Brooklyn clearly has the biggest nightlife, followed by Manhattan.
+
+## Screenshots
+
+![](imgs/app_screenshots.png)
