@@ -23,10 +23,22 @@
   margin-top: 25px;
 }
 
-h2 {
+h4 {
   font-weight: 600;
+  padding-left: 10px;
 }
 
+#selected {
+  padding-left: 10px;
+}
+
+h5 {
+  margin-bottom: 0px;
+}
+
+input.form-control {
+  width: 80%;
+}
 .shiny-input-container:not(.shiny-input-container-inline) {
   width: 100%;
   margin-left: auto;

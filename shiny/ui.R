@@ -4,22 +4,24 @@ library(shinythemes)
 shinyUI(fluidPage(
   theme = shinytheme("cyborg"),
   includeCSS("styles.css"),
-  titlePanel( "Noise Complaints in NYC"),
-  sidebarPanel(
-    checkboxGroupInput("borough",
-                       "Select Borough:",
-                       choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island"),
-                       selected=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
-    dateInput("date", label = h5("Date input"), value = "2016-01-01", min="2016-01-01", max="2018-01-15")
-  ),
-  mainPanel(
-    h4(textOutput("selected")),
-    withSpinner(leafletOutput("map")),
-    withSpinner(plotlyOutput("timePlot", height=250)),
-    sliderInput("time", "Time of day:",
-                min = 0, max = 23,
-                value = c(0,23))
-   )
+  leafletOutput("map", height="800px"),
+  
+  absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
+                draggable = TRUE, top = 20, left = 20, right = "auto", bottom = "auto",
+                width = 350, height = "auto",
+                h4("Noise Complaints in NYC"),
+                checkboxGroupInput("borough",
+                                   "Select Borough:",
+                                   choices=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island"),
+                                   selected=c("Manhattan", "Brooklyn", "Bronx", "Queens", "Staten Island")),
+                dateInput("date", label = h5("Date input"), value = "2016-01-01", min="2016-01-01", max="2018-01-15"),
+                h5(textOutput("selected")),
+                withSpinner(plotlyOutput("timePlot", height=250)),
+                sliderInput("time", "Time of day:",
+                            min = 0, max = 23,
+                            value = c(0,23))
+            
+  )
                  
   )
 )
