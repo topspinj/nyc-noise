@@ -69,7 +69,7 @@ shinyServer(function(input, output) {
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
       addProviderTiles("CartoDB.DarkMatter", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, stroke=FALSE, fillOpacity=0.8)  
+      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~location_type, stroke=FALSE, fillOpacity=0.8)  
       # addLegend("bottomright", pal = pal, values = ~hour_created, opacity = 1)
   })
   
