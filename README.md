@@ -19,9 +19,8 @@ This app uses 311* service request data from [NYC OpenData](https://data.cityofn
 
 ![](imgs/month_plot.png)
 
-![](imgs/borough_plot.png)
 
-Brooklyn clearly has the biggest nightlife, followed by Manhattan.
+Brooklyn has the biggest nightlife, followed by Manhattan. Most noise complaints happen in the summertime.
 
 ## Screenshots
 
