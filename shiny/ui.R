@@ -8,7 +8,7 @@ shinyUI(fluidPage(
   
   absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE,
                 draggable = TRUE, top = 20, left = 20, right = "auto", bottom = "auto",
-                width = 350, height = "auto",
+                width = 360, height = "auto",
                 h4("Noise Complaints in NYC"),
                 checkboxGroupInput("borough",
                                    "Select Borough:",

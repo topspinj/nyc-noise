@@ -36,13 +36,17 @@ shinyServer(function(input, output) {
       tickcolor = toRGB("#262626"),
       title = "time of day",
       color="white",
-      range = c(0,23)
+      range = c(0,23),
+      tickfont = list(size=8),
+      titlefont = list(size=9)
     )
     
     yaxis <- list(
       title = 'complaint count',
       color="white",
-      showgrid=FALSE
+      showgrid=FALSE,
+      tickfont = list(size=8),
+      titlefont = list(size=9)
     )
 
     pal <- viridis(24)
@@ -66,7 +70,7 @@ shinyServer(function(input, output) {
     leaflet(data = nycData()) %>% 
       setView(lng = -73.95, lat = 40.78, zoom = 12) %>%
       addProviderTiles("CartoDB.DarkMatter", options = providerTileOptions(minZoom = 9)) %>% 
-      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=paste(~as.character(hour_created_formatted), ~borough), stroke=FALSE, fillOpacity=0.8)  
+      addCircleMarkers(~long, ~lat, color=~pal(hour_created), radius=3, label=~as.character(hour_created_formatted), stroke=FALSE, fillOpacity=0.8)  
       # addLegend("bottomright", pal = pal, values = ~hour_created, opacity = 1)
   })
   
