@@ -15,7 +15,7 @@ shinyUI(fluidPage(
   mainPanel(
     h4(textOutput("selected")),
     withSpinner(leafletOutput("map")),
-    withSpinner(plotlyOutput("timePlot")),
+    withSpinner(plotlyOutput("timePlot", height=250)),
     sliderInput("time", "Time of day:",
                 min = 0, max = 23,
                 value = c(0,23))
