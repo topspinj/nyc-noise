@@ -25,4 +25,4 @@ Brooklyn clearly has the biggest nightlife, followed by Manhattan.
 
 ## Screenshots
 
-![](imgs/app_screenshots.png)
+![](imgs/app_screenshot.png)
